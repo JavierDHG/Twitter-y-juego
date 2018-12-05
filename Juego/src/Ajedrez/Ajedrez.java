@@ -1,8 +1,6 @@
 package Ajedrez;
 import java.util.ArrayList;
-
 import processing.core.PApplet;
-
 
 public class Ajedrez extends PApplet {
     public static void main(String [] args) {
@@ -10,12 +8,18 @@ public class Ajedrez extends PApplet {
 		PApplet.main(appletArgs);
 		
 	}
-	float y=0;
-	float x=0;
+	char peon='P';
+	char caballo='C';
+	char alfil='A';
+	char rey='r';
+	char reina='R';
+	char torre='T';
+    int filas = 8;
+    int columnas = 8;
+	int dir=4;
+	
 	    public void setup() {
 	    	size(800,800);
-	        int filas = 8;
-	        int columnas = 8;
 	        for(int i = 0 ; i < filas ; i++) {
 	            for(int j = 0 ; j < columnas ; j++){
 	            	if((j*j)/8==0){
@@ -29,32 +33,6 @@ public class Ajedrez extends PApplet {
 	    	  size(800, 800);	    	  
 		    }
 	    public void draw() {
-			ellipse((width/2)+x,(height/2)+y,10,10);
-	    	if(keyPressed &&key == CODED) {
-	    		if(keyCode==LEFT) {
-	    			x=x-10;
-	    		}
-	    		else if(keyCode == RIGHT) {
-	    			x=x+10;
-	    		}
-	    		else if(keyCode==UP) {
-	    			y= y -10;
-	    		}
-	    		else if(keyCode == DOWN) {
-	    			y=y+10;
-	    		}
-	    		if((x+320)<=0) {
-	    			x=x+10;
-	    		}
-	    		if((x+320)>=width) {
-	    			x=x-10;
-	    		}
-	    	}if((y+240)<=0) {
-	    		y=y+10;
-	    	}
-	    	if((y+240)>=height) {
-	    	y=y-10;
-	    	}
 	    	fill(255);
 	    	textSize(26); 
 	    	text("T", 40, 50); 
@@ -66,10 +44,10 @@ public class Ajedrez extends PApplet {
 	    	text("A", 240, 50); 
 	    	fill(255);
 	    	textSize(26); 
-	    	text("R", 340, 50); 
+	    	text("r", 340, 50); 
 	    	fill(255);
 	    	textSize(26); 
-	    	text("RN", 440, 50); 
+	    	text("R", 440, 50); 
 	    	fill(255);
 	    	textSize(26); 
 	    	text("A", 540, 50); 
@@ -137,10 +115,10 @@ public class Ajedrez extends PApplet {
 	    	text("A", 240, 750); 
 	    	fill(255);
 	    	textSize(26); 
-	    	text("R", 340, 750); 
+	    	text("r", 340, 750); 
 	    	fill(255);
 	    	textSize(26); 
-	    	text("RN", 440, 750); 
+	    	text("R", 440, 750); 
 	    	fill(255);
 	    	textSize(26); 
 	    	text("A", 540, 750); 
@@ -154,4 +132,100 @@ public class Ajedrez extends PApplet {
 	    	textSize(26);
 	    	
 }	
+	    public void movimientos() {
+	    	Object[] arreglo = new Object[8];
+	    	Object[] arreglo1 = new Object[8];
+		        for(int i = 0 ; i < arreglo.length  ; i++) {
+		            for(int j = 0 ; j < arreglo.length ; j++){
+		            	if(peon==UP) {
+		            		peon=(char) arreglo1[j+1];
+		            	}else if(peon==DOWN){
+		            		peon=(char) arreglo1[j-1];
+		            	}else if(peon==LEFT){
+		            		peon=(char) arreglo1[i-1];		            		
+		            	}else if(peon==RIGHT){
+		            		peon=(char) arreglo1[i+1];
+		            	}
+		            	if(caballo==UP) {
+		            		caballo=(char) arreglo1[j+3];
+		            	}else if(caballo==DOWN){
+		            		caballo=(char) arreglo1[j-3];
+		            	}else if(caballo==LEFT){
+		            		caballo=(char) arreglo1[i-1];		            		
+		            	}else if(caballo==RIGHT){
+		            		caballo=(char) arreglo1[i+1];
+		            	}
+		            	if(alfil==UP) {
+		            		alfil=(char) arreglo1[j+1];
+		            	}else if(alfil==DOWN){
+		            		alfil=(char) arreglo1[j-1];
+		            	}else if(alfil==LEFT){
+		            		alfil=(char) arreglo1[i-1];		            		
+		            	}else if(alfil==RIGHT){
+		            		alfil=(char) arreglo1[i+1];	
+		            	}
+		            	if(rey==UP) {
+		            		rey=(char) arreglo1[j+1];
+		            	}else if(rey==DOWN){
+		            		rey=(char) arreglo1[j-1];
+		            	}else if(rey==LEFT){
+		            		rey=(char) arreglo1[i+1];	            		
+		            	}else if(rey==RIGHT){
+		            		rey=(char) arreglo1[i-1];	
+		            	}
+		            	if(reina==UP) {
+		            		reina=(char) arreglo1[j+7];
+		            		reina=(char) arreglo1[j+1];
+		            	}else if(reina==DOWN){
+		            		reina=(char) arreglo1[j-7];
+		            		reina=(char) arreglo1[j-1];
+		            	}else if(reina==LEFT){
+		            		reina=(char) arreglo1[i+7];
+		            		reina=(char) arreglo1[i-1];	
+		            	}else if(reina==RIGHT){
+		            		reina=(char) arreglo1[i-7];	
+		            		reina=(char) arreglo1[i+1];	
+		            	}
+		            	if(torre==UP) {
+		            		torre=(char) arreglo1[j+7];
+		            	}else if(torre==DOWN){
+		            		torre=(char) arreglo1[j-7];
+		            	}else if(torre==LEFT){
+		            		torre=(char) arreglo1[i+7];	            		
+		            	}else if(torre==RIGHT){
+		            		torre=(char) arreglo1[i-7];	
+		            	}
+		            }
+		         }    	
+	    }
+	    public void keyPressed() {
+	    	  if(key=='w' || key==UP)
+	    	    {
+	    	     if(dir!=1)
+	    	        dir=0;
+	    	        
+	    	    }
+	    	  if(key=='s' || key==DOWN)
+	    	    {
+	    	      if(dir!=0)
+	    	         dir=1;
+	    	         
+	    	    }
+	    	  if(key=='a' || key==LEFT)
+	    	    {
+	    	     if(dir!=3)
+	    	        dir=2; 
+	    	        
+	    	    } 
+	    	  if(key=='d' || key==RIGHT)
+	    	    {
+	    	      if(dir!=2)
+	    	         dir=3;
+	    	    }
+	    	  if(key=='j')
+	    	    {
+	    	      if(dir!=4)
+	    	         dir=4;
+	    	    }
+	    }
 }
